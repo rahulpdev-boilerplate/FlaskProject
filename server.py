@@ -14,16 +14,17 @@ from wtforms.validators import DataRequired, Length, Email
 from flask_ckeditor import CKEditor, CKEditorField
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 
 # Create Flask application
 app = Flask(__name__)
 # Add csrf protection
-app.secret_key = "any-string-you-want-just-keep-it-secret"
+app.secret_key = os.environ.get('FLASK_KEY')
 # Initialise SQLAlchemy, Bootstrap-Flask, CKEditor, Flask-Login extensions
 # and configure Flask application for extensions
 db = SQLAlchemy()
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DB_URI')
 db.init_app(app)
 Bootstrap5(app)
 ckeditor = CKEditor(app)
