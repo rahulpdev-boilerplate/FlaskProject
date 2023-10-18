@@ -1,0 +1,49 @@
+<!-- Example use of WTForms, Flask CKEditor form field and Flask Flash messages -->
+<!-- Example use of Bootstrap-Flask to render form in Option 2 -->
+
+<!DOCTYPE html>
+{% from 'bootstrap5/form.html' import render_form %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Login</h1>
+            <!-- Flask Flash messages template-->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('login_page') }}" method="POST" novalidate>
+                <!-- Option 1: WTForm in HTML -->
+<!--                {{ form.csrf_token }}-->
+<!--                <p>-->
+<!--                    {{ form.email.label }} <br> {{ form.email(size=30) }}-->
+<!--                    {% for err in form.email.errors %}-->
+<!--                <span style="color:red">{{ err }}</span>-->
+<!--                    {% endfor%}-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    {{ form.password.label }} <br> {{ form.password(size=30) }}-->
+<!--                    {% for err in form.password.errors %}-->
+<!--                <span style="color:red">{{ err }}</span>-->
+<!--                    {% endfor%}-->
+<!--                </p>-->
+<!--                    {{ form.submit }}-->
+                <!-- Option 2: Bootstrap-Flask renders WTForm with passed form object -->
+                <p>
+                    {{ ckeditor.load(pkg_type="standard") }}
+                    {{ ckeditor.config(name="message") }}
+                    {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                </p>
+
+            </form>
+        </div>
+    </body>
+</html>

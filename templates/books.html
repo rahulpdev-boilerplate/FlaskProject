@@ -1,0 +1,23 @@
+<!-- Example use of template -->
+
+<!-- Example use of dynamic href link with URL arguments-->
+
+{% include "header.html" %}
+
+<body>
+    <ul>
+      {% for book in books %}
+      <li>
+        <a href="">Delete</a>
+        {{book.title}} - {{book.author}} - {{book.rating}}/10
+        <!-- Show buttons based on user logged in status -->
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('edit_page', id=book.id) }}">Edit Rating</a>
+        {% else %}
+            <a href="{{ url_for('login_page') }}">Login</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+</body>
+</html>

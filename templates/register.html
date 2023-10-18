@@ -1,0 +1,27 @@
+<!-- Example use of adding Bootstrap-Flask styling and adding Bootstrap class -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+            {% block styles %}
+            {{ bootstrap.load_css() }} {% endblock %}
+
+        <title>Register</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Registration Form</h1>
+            <form action="{{ url_for('register_page') }}" method="post" name="formSubmitted">
+                <label>Name</label>
+                <input type="text" placeholder="name" name="name">
+                <label>Email</label>
+                <input type="text" placeholder="email" name="email" required="required">
+                <label>Password</label>
+                <input type="text" placeholder="password" name="password" required="required">
+                <button class="btn btn-primary btn-lg" type="submit">Sign me up</button>
+            </form>
+        </div>
+    </body>
+</html>
